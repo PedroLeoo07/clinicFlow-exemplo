@@ -111,23 +111,43 @@
 
                 <!-- Formulário de Cadastro -->
                 <div id="registerForm" class="auth-form">
-                    <h3>Crie sua conta</h3>
-                    <p class="form-subtitle">Preencha os dados para se cadastrar</p>
+                    <h3 class="form-title">Olá, seja muito bem vindo a ClinicFlow</h3>
+                    <p class="form-subtitle">Realize o seu cadastro abaixo</p>
 
                     <form onsubmit="handleRegister(event)">
-                        <div class="input-group">
-                            <label for="registerName">Nome Completo</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-user"></i>
-                                <input type="text" id="registerName" required placeholder="João Silva">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="registerEmail">Email</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="registerEmail" required placeholder="Digite seu email">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="registerBirthDate">Data de Nascimento</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-calendar"></i>
+                                    <input type="date" id="registerBirthDate" required placeholder="dd/mm/aaaa">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="input-group">
-                            <label for="registerEmail">Email</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-envelope"></i>
-                                <input type="email" id="registerEmail" required placeholder="seu@email.com">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="registerName">Nome</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="registerName" required placeholder="Nome completo">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="registerPhone">Telefone</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-phone"></i>
+                                    <input type="tel" id="registerPhone" required placeholder="Apenas números">
+                                </div>
                             </div>
                         </div>
 
@@ -136,45 +156,31 @@
                                 <label for="registerCPF">CPF</label>
                                 <div class="input-with-icon">
                                     <i class="fas fa-id-card"></i>
-                                    <input type="text" id="registerCPF" required placeholder="000.000.000-00" maxlength="14">
+                                    <input type="text" id="registerCPF" required placeholder="Digite seu CPF" maxlength="14">
                                 </div>
                             </div>
 
                             <div class="input-group">
-                                <label for="registerPhone">Telefone</label>
+                                <label for="registerPassword">Senha</label>
                                 <div class="input-with-icon">
-                                    <i class="fas fa-phone"></i>
-                                    <input type="tel" id="registerPhone" required placeholder="(00) 00000-0000">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="registerPassword" required placeholder="Mínimo 6 dígitos" minlength="6">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="input-group">
-                            <label for="registerPassword">Senha</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" id="registerPassword" required placeholder="Mínimo 6 caracteres" minlength="6">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="registerConfirmPassword">Confirmar Senha</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" id="registerConfirmPassword" required placeholder="Digite a senha novamente" minlength="6">
-                            </div>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <label>
-                                <input type="checkbox" id="termsAccept" required>
-                                <span>Aceito os <a href="#" onclick="showTerms()">termos de uso e política de privacidade (LGPD)</a></span>
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn-login">
+                        <button type="submit" class="btn-register">
                             Cadastrar
                         </button>
+
+                        <div class="register-footer">
+                            <p>
+                                <input type="checkbox" id="termsAccept" required>
+                                <label for="termsAccept">
+                                    Eu estou ciente e realizo notificações
+                                </label>
+                            </p>
+                        </div>
                     </form>
                 </div>
             </div>
