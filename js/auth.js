@@ -28,13 +28,34 @@ function resetSystem() {
 function toggleForm(formType) {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
+    const tabButtons = document.querySelectorAll('.tab-button');
     
     if (formType === 'register') {
         loginForm.classList.remove('active');
         registerForm.classList.add('active');
+        tabButtons[0].classList.remove('active');
+        tabButtons[1].classList.add('active');
     } else {
         registerForm.classList.remove('active');
         loginForm.classList.add('active');
+        tabButtons[1].classList.remove('active');
+        tabButtons[0].classList.add('active');
+    }
+}
+
+// Alternar visibilidade da senha
+function togglePasswordVisibility(inputId) {
+    const input = document.getElementById(inputId);
+    const button = input.parentElement.querySelector('.toggle-password i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        button.classList.remove('fa-eye');
+        button.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        button.classList.remove('fa-eye-slash');
+        button.classList.add('fa-eye');
     }
 }
 

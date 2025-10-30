@@ -26,6 +26,12 @@ body {
     line-height: 1.6;
 }
 
+body.login-page {
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
 /* ==================== CONTAINERS ==================== */
 .container {
     max-width: 1200px;
@@ -95,36 +101,182 @@ body {
     font-weight: 500;
 }
 
-/* ==================== LOGIN/REGISTER ==================== */
-.login-container {
+/* ==================== LOGIN/REGISTER (NOVO DESIGN) ==================== */
+.login-wrapper {
+    display: flex;
+    min-height: 100vh;
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px var(--shadow);
+}
+
+/* Lado Esquerdo - Apresentação */
+.login-left {
+    flex: 1;
+    background: linear-gradient(180deg, #d5eef7 0%, #c9e9f5 100%);
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.brand-icon i {
+    font-size: 1.4rem;
+    color: #14b8a6;
+}
+
+.brand-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.login-content {
+    flex: 1;
+}
+
+.login-content h2 {
+    font-size: 1.75rem;
+    color: #0f172a;
+    line-height: 1.4;
+    margin-bottom: 2.5rem;
     max-width: 450px;
-    margin: 50px auto;
+    font-weight: 400;
+}
+
+.doctors-image {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: 340px;
+    background: #7dd3c0;
+    border-radius: 16px;
+    overflow: visible;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.doctors-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.image-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    border-radius: 16px;
+}
+
+.image-fallback i {
+    font-size: 5rem;
+    color: white;
+    opacity: 0.9;
+}
+
+.image-badges {
+    position: absolute;
+    bottom: -15px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    gap: 1rem;
+    z-index: 10;
+}
+
+.image-badge {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.image-badge i {
+    font-size: 1.1rem;
+    color: #0f172a;
+}
+
+.image-badge span {
+    color: #0f172a;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Lado Direito - Formulário */
+.login-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 3rem;
-    animation: fadeIn 0.5s;
+    background: #ffffff;
 }
 
-.login-header {
-    text-align: center;
-    margin-bottom: 2rem;
+.login-form-container {
+    width: 100%;
+    max-width: 420px;
 }
 
-.login-header i {
-    font-size: 4rem;
-    color: var(--primary);
-    margin-bottom: 1rem;
+/* Tabs */
+.form-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 4px;
 }
 
-.login-header h1 {
-    color: var(--primary);
-    margin-bottom: 0.5rem;
+.tab-button {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 8px;
 }
 
-.login-header p {
-    color: var(--secondary);
-    font-size: 0.9rem;
+.tab-button.active {
+    background: white;
+    color: #0f172a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.tab-button:hover:not(.active) {
+    color: #475569;
 }
 
 .auth-form {
@@ -133,7 +285,139 @@ body {
 
 .auth-form.active {
     display: block;
-    animation: slideIn 0.3s;
+    animation: fadeIn 0.4s;
+}
+
+.form-title {
+    font-size: 1.25rem;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-subtitle {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 1rem;
+    color: #64748b;
+    font-size: 0.95rem;
+    z-index: 1;
+}
+
+.input-with-icon .select-arrow {
+    left: auto;
+    right: 1rem;
+    pointer-events: none;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 2.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.input-with-icon input::placeholder {
+    color: #94a3b8;
+}
+
+.input-with-icon input:focus,
+.input-with-icon select:focus {
+    outline: none;
+    border-color: #7dd3c0;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(125, 211, 192, 0.1);
+}
+
+.input-with-icon select {
+    appearance: none;
+    padding-right: 2.75rem;
+    cursor: pointer;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s;
+    z-index: 2;
+}
+
+.toggle-password:hover {
+    color: #0f172a;
+}
+
+.checkbox-group {
+    margin: 1.5rem 0;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.checkbox-group span {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.checkbox-group a {
+    color: #0ea5e9;
+    text-decoration: none;
+}
+
+.checkbox-group a:hover {
+    text-decoration: underline;
 }
 
 .form-group {
@@ -181,7 +465,90 @@ body {
     font-size: 0.9rem;
 }
 
-/* ==================== DEMO USER BOX ==================== */
+/* Botão de Login */
+.btn-login {
+    width: 100%;
+    padding: 0.95rem;
+    background: linear-gradient(135deg, #7dd3c0 0%, #5fc9b5 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(125, 211, 192, 0.3);
+    margin-top: 0.5rem;
+}
+
+.btn-login:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(125, 211, 192, 0.4);
+    background: linear-gradient(135deg, #5fc9b5 0%, #4db8a5 100%);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* Demo Credentials */
+.demo-credentials {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.demo-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.demo-text i {
+    color: #94a3b8;
+}
+
+.demo-text strong {
+    color: #0f172a;
+}
+
+.btn-auto-fill {
+    background: white;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-auto-fill:hover {
+    background: #7dd3c0;
+    color: white;
+    border-color: #7dd3c0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(125, 211, 192, 0.3);
+}
+
+.btn-auto-fill i {
+    font-size: 0.75rem;
+}
+
+/* ==================== DEMO USER BOX (OLD - MANTER PARA COMPATIBILIDADE) ==================== */
 .demo-user-box {
     background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
     border: 2px solid #3b82f6;
@@ -1130,7 +1497,81 @@ body {
 }
 
 /* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+    .login-wrapper {
+        flex-direction: column;
+    }
+
+    .login-left {
+        padding: 2.5rem;
+    }
+
+    .login-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .doctors-image {
+        max-width: 100%;
+        height: 280px;
+    }
+
+    .image-badges {
+        flex-direction: column;
+        gap: 0.75rem;
+        left: 15px;
+        right: auto;
+        bottom: 15px;
+    }
+
+    .image-badge {
+        width: fit-content;
+    }
+}
+
 @media (max-width: 768px) {
+    .login-left {
+        padding: 2rem;
+    }
+
+    .login-right {
+        padding: 2rem;
+    }
+
+    .login-form-container {
+        max-width: 100%;
+    }
+
+    .login-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .doctors-image {
+        height: 240px;
+    }
+
+    .image-badge span {
+        font-size: 0.8rem;
+    }
+
+    .form-tabs {
+        margin-bottom: 2rem;
+    }
+
+    .input-row {
+        grid-template-columns: 1fr;
+    }
+
+    .demo-credentials {
+        padding: 0.875rem;
+    }
+
+    .demo-text {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+}
+
     .nav-content {
         flex-direction: column;
         gap: 1rem;
