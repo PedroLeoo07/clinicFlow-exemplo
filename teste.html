@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - ClinicFlow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        pre {
+            background: #1e293b;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Diagnóstico do Sistema ClinicFlow</h1>
+    
+    <div class="box">
+        <h2>Ações</h2>
+        <button onclick="testInit()">1. Inicializar Dados</button>
+        <button onclick="testLogin()">2. Testar Login</button>
+        <button onclick="showUsers()">3. Ver Usuários</button>
+        <button onclick="clearAll()">4. Limpar Tudo</button>
+        <button onclick="goToLogin()">5. Ir para Login</button>
+    </div>
+    
+    <div class="box">
+        <h2>Resultado:</h2>
+        <pre id="output">Clique em um botão para começar...</pre>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script>
+        function log(msg) {
+            const output = document.getElementById('output');
+            output.textContent = msg;
+            console.log(msg);
+        }
+
+        function testInit() {
+            try {
+                initializeDemoData();
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                log('✅ Dados inicializados com sucesso!\n\n' + 
+                    'Total de usuários: ' + users.length + '\n\n' +
+                    JSON.stringify(users, null, 2));
+            } catch (error) {
+                log('❌ Erro ao inicializar dados:\n' + error.message);
+            }
+        }
+
+        function testLogin() {
+            try {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const testEmail = 'paciente@clinicflow.com';
+                const testPassword = '123456';
+                const testRole = 'paciente';
+                
+                const user = users.find(u => 
+                    u.email === testEmail && 
+                    u.password === testPassword && 
+                    u.role === testRole
+                );
+                
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    log('✅ Login bem-sucedido!\n\n' + 
+                        'Usuário autenticado:\n' + 
+                        JSON.stringify(user, null, 2));
+                } else {
+                    log('❌ Falha no login!\n\n' +
+                        'Usuário não encontrado com as credenciais:\n' +
+                        'Email: ' + testEmail + '\n' +
+                        'Senha: ' + testPassword + '\n' +
+                        'Role: ' + testRole);
+                }
+            } catch (error) {
+                log('❌ Erro ao testar login:\n' + error.message);
+            }
+        }
+
+        function showUsers() {
+            try {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+                
+                log('📋 Usuários cadastrados: ' + users.length + '\n\n' +
+                    JSON.stringify(users, null, 2) + '\n\n' +
+                    '👤 Usuário atual:\n' +
+                    JSON.stringify(currentUser, null, 2));
+            } catch (error) {
+                log('❌ Erro ao mostrar usuários:\n' + error.message);
+            }
+        }
+
+        function clearAll() {
+            if (confirm('⚠️ Limpar todos os dados do localStorage?')) {
+                localStorage.clear();
+                log('✅ LocalStorage limpo!\n\nClique em "Inicializar Dados" para recriar.');
+            }
+        }
+
+        function goToLogin() {
+            window.location.href = 'index.html';
+        }
+
+        // Auto-inicializar ao carregar
+        window.addEventListener('DOMContentLoaded', () => {
+            log('🚀 Sistema de diagnóstico carregado!\n\nClique nos botões para testar.');
+        });
+    </script>
+</body>
+</html>

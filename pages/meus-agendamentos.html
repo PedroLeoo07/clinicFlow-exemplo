@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Agendamentos - ClinicFlow</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <i class="fas fa-hospital-user"></i>
+                <span>ClinicFlow</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="marcar-consulta.html"><i class="fas fa-calendar-plus"></i> Marcar Consulta</a></li>
+                <li><a href="meus-agendamentos.html" class="active"><i class="fas fa-list"></i> Meus Agendamentos</a></li>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-list"></i> Meus Agendamentos</h1>
+            <p>Visualize e gerencie suas consultas</p>
+        </div>
+
+        <div class="appointments-tabs">
+            <button class="tab-btn active" onclick="switchTab('upcoming')">
+                <i class="fas fa-calendar-check"></i> Próximas Consultas
+            </button>
+            <button class="tab-btn" onclick="switchTab('past')">
+                <i class="fas fa-history"></i> Consultas Anteriores
+            </button>
+        </div>
+
+        <!-- Próximas Consultas -->
+        <div id="upcomingTab" class="tab-content active">
+            <div id="upcomingAppointments" class="appointments-list">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Consultas Anteriores -->
+        <div id="pastTab" class="tab-content">
+            <div id="pastAppointments" class="appointments-list">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cancelamento -->
+    <div id="cancelModal" class="modal">
+        <div class="modal-content warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2>Cancelar Consulta</h2>
+            <p>Tem certeza que deseja cancelar esta consulta?</p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeCancelModal()">
+                    <i class="fas fa-times"></i> Não
+                </button>
+                <button class="btn btn-danger" onclick="confirmCancel()">
+                    <i class="fas fa-check"></i> Sim, Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/appointments.js"></script>
+</body>
+</html>

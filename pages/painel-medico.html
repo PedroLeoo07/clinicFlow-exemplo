@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Médico - ClinicFlow</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <i class="fas fa-hospital-user"></i>
+                <span>ClinicFlow</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="painel-medico.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+            <div class="user-info">
+                <span id="userName">Dr. Médico</span>
+                <i class="fas fa-user-md"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-chart-line"></i> Painel do Médico</h1>
+            <p>Gerencie seus agendamentos e prontuários</p>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-calendar-day"></i>
+                <div>
+                    <h3 id="todayCount">0</h3>
+                    <p>Consultas Hoje</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-calendar-week"></i>
+                <div>
+                    <h3 id="weekCount">0</h3>
+                    <p>Esta Semana</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div>
+                    <h3 id="patientCount">0</h3>
+                    <p>Pacientes Ativos</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h3 id="nextAppointment">-</h3>
+                    <p>Próxima Consulta</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters">
+            <div class="filter-group">
+                <label><i class="fas fa-calendar"></i> Data:</label>
+                <input type="date" id="filterDate" onchange="filterAppointments()">
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-filter"></i> Status:</label>
+                <select id="filterStatus" onchange="filterAppointments()">
+                    <option value="all">Todos</option>
+                    <option value="agendada">Agendada</option>
+                    <option value="confirmada">Confirmada</option>
+                    <option value="concluida">Concluída</option>
+                    <option value="cancelada">Cancelada</option>
+                </select>
+            </div>
+            <button class="btn btn-secondary" onclick="clearFilters()">
+                <i class="fas fa-times"></i> Limpar Filtros
+            </button>
+        </div>
+
+        <!-- Lista de Agendamentos -->
+        <div class="panel-section">
+            <h2><i class="fas fa-calendar-alt"></i> Agendamentos</h2>
+            <div id="doctorAppointments" class="appointments-table">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Prontuários Recentes -->
+        <div class="panel-section">
+            <h2><i class="fas fa-file-medical"></i> Prontuários Recentes</h2>
+            <div id="recentRecords" class="records-list">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalhes da Consulta -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content large">
+            <button class="modal-close" onclick="closeAppointmentModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-info-circle"></i> Detalhes da Consulta</h2>
+            <div id="appointmentDetails">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Prontuário -->
+    <div id="recordModal" class="modal">
+        <div class="modal-content large">
+            <button class="modal-close" onclick="closeRecordModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-file-medical"></i> Prontuário do Paciente</h2>
+            <div id="recordForm" class="record-form">
+                <div class="form-group">
+                    <label>Paciente:</label>
+                    <input type="text" id="recordPatient" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Data da Consulta:</label>
+                    <input type="text" id="recordDate" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Queixa Principal:</label>
+                    <textarea id="recordComplaint" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Exame Físico:</label>
+                    <textarea id="recordExam" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Diagnóstico:</label>
+                    <textarea id="recordDiagnosis" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Prescrição:</label>
+                    <textarea id="recordPrescription" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Observações:</label>
+                    <textarea id="recordNotes" rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeRecordModal()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button class="btn btn-primary" onclick="saveRecord()">
+                        <i class="fas fa-save"></i> Salvar Prontuário
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/doctor-panel.js"></script>
+</body>
+</html>

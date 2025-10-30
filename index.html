@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClinicFlow - Gestão de Agendamentos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-hospital-user"></i>
+                <h1>ClinicFlow</h1>
+                <p>Sistema de Gestão de Agendamentos e Prontuários</p>
+            </div>
+
+            <!-- Formulário de Login -->
+            <div id="loginForm" class="auth-form active">
+                <h2>Entrar</h2>
+                
+                <!-- Usuário de Demonstração -->
+                <div class="demo-user-box">
+                    <div class="demo-header">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Usuário de Demonstração</strong>
+                    </div>
+                    <div class="demo-credentials">
+                        <div class="demo-item">
+                            <span class="demo-label">Email:</span>
+                            <span class="demo-value">paciente@clinicflow.com</span>
+                        </div>
+                        <div class="demo-item">
+                            <span class="demo-label">Senha:</span>
+                            <span class="demo-value">123456</span>
+                        </div>
+                        <div class="demo-item">
+                            <span class="demo-label">Tipo:</span>
+                            <span class="demo-value">Paciente</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-demo" onclick="fillDemoCredentials()">
+                        <i class="fas fa-magic"></i> Preencher Automaticamente
+                    </button>
+                    <button type="button" class="btn-reset" onclick="resetSystem()" title="Limpar dados e reiniciar sistema">
+                        <i class="fas fa-sync-alt"></i> Resetar Sistema
+                    </button>
+                </div>
+
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <input type="email" id="loginEmail" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">
+                            <i class="fas fa-lock"></i> Senha
+                        </label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginRole">
+                            <i class="fas fa-user-tag"></i> Tipo de Usuário
+                        </label>
+                        <select id="loginRole" required>
+                            <option value="paciente">Paciente</option>
+                            <option value="medico">Médico</option>
+                            <option value="secretaria">Secretária</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                </form>
+                <p class="toggle-form">
+                    Não tem conta? <a href="#" onclick="toggleForm('register')">Cadastre-se</a>
+                </p>
+            </div>
+
+            <!-- Formulário de Cadastro -->
+            <div id="registerForm" class="auth-form">
+                <h2>Cadastrar</h2>
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerName">
+                            <i class="fas fa-user"></i> Nome Completo
+                        </label>
+                        <input type="text" id="registerName" required placeholder="João Silva">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <input type="email" id="registerEmail" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerCPF">
+                            <i class="fas fa-id-card"></i> CPF
+                        </label>
+                        <input type="text" id="registerCPF" required placeholder="000.000.000-00" maxlength="14">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">
+                            <i class="fas fa-phone"></i> Telefone
+                        </label>
+                        <input type="tel" id="registerPhone" required placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">
+                            <i class="fas fa-lock"></i> Senha
+                        </label>
+                        <input type="password" id="registerPassword" required placeholder="••••••••" minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">
+                            <i class="fas fa-lock"></i> Confirmar Senha
+                        </label>
+                        <input type="password" id="registerConfirmPassword" required placeholder="••••••••" minlength="6">
+                    </div>
+                    <div class="form-group checkbox">
+                        <label>
+                            <input type="checkbox" id="termsAccept" required>
+                            Aceito os <a href="#" onclick="showTerms()">termos de uso e política de privacidade (LGPD)</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Cadastrar
+                    </button>
+                </form>
+                <p class="toggle-form">
+                    Já tem conta? <a href="#" onclick="toggleForm('login')">Faça login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/utils.js"></script>
+</body>
+</html>
